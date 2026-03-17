@@ -1,4 +1,4 @@
-import type { RollResult, RollPhase, D100Result } from '@/lib/types/dice'
+import type { D100Result, RollPhase, RollResult } from '@/lib/types/dice'
 
 function calcD100(results: RollResult[]): D100Result {
   const tensRaw = results[0]?.value ?? 10
@@ -67,7 +67,7 @@ export function ResultDisplay({ phase, results, isD100 }: ResultDisplayProps) {
         {allRolls.map((die, i) => (
           <span
             key={i}
-            className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-xl font-bold text-indigo-800 shadow-sm"
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-xl font-bold text-green-800 shadow-sm"
           >
             {die.value}
           </span>

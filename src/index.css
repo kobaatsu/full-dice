@@ -28,3 +28,8 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
+
+canvas {
+  width: 100%;
+  height: 100%;
+}

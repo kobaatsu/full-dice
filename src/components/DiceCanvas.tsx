@@ -1,5 +1,6 @@
-import { forwardRef, useImperativeHandle } from 'react'
 import { useDiceBox } from '@/hooks/useDiceBox'
+import { forwardRef, useImperativeHandle } from 'react'
+
 import type { DiceConfig, RollPhase, RollResult } from '@/lib/types/dice'
 
 const DICE_CONTAINER_ID = 'dice-box-container'
@@ -41,6 +42,9 @@ export const DiceCanvas = forwardRef<DiceCanvasHandle, DiceCanvasProps>(function
         inset: 0,
         zIndex: 0,
         pointerEvents: 'none',
+        overflow: 'hidden',
+        width: '100vw',
+        height: '100dvh',
       }}
     />
   )

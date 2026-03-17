@@ -21,8 +21,8 @@ export function DiceCountSelector({ count, onChange, disabled }: DiceCountSelect
             'min-h-10 min-w-10 rounded-lg border-2 text-sm font-semibold transition-all',
             'focus:outline-none focus:ring-2 focus:ring-offset-1',
             count === n
-              ? 'border-indigo-500 bg-indigo-500 text-white'
-              : 'border-gray-200 bg-white text-gray-600 hover:border-indigo-300 hover:bg-indigo-50',
+              ? 'border-green-500 bg-green-500 text-white'
+              : 'border-gray-200 bg-white text-gray-600 hover:border-green-300 hover:bg-green-50',
             disabled && 'opacity-50 cursor-not-allowed',
           )}
         >

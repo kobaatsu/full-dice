@@ -1,12 +1,13 @@
-import { useRef, useState, useCallback, useEffect } from 'react'
 import { DiceCanvas, type DiceCanvasHandle } from '@/components/DiceCanvas'
-import { DiceTypeSelector } from '@/components/DiceTypeSelector'
 import { DiceCountSelector } from '@/components/DiceCountSelector'
-import { RollButton } from '@/components/RollButton'
-import { ResultDisplay } from '@/components/ResultDisplay'
+import { DiceTypeSelector } from '@/components/DiceTypeSelector'
 import { PermissionRequest } from '@/components/PermissionRequest'
+import { ResultDisplay } from '@/components/ResultDisplay'
+import { RollButton } from '@/components/RollButton'
 import { useMotionPermission } from '@/hooks/useMotionPermission'
 import { useShakeDetection } from '@/hooks/useShakeDetection'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
 import type { DiceConfig, DiceSide, RollPhase, RollResult } from '@/lib/types/dice'
 
 const DEBUG = new URLSearchParams(window.location.search).has('debug')
@@ -21,7 +22,7 @@ interface AccDebug {
 
 export default function App() {
   const canvasRef = useRef<DiceCanvasHandle>(null)
-  const [diceConfig, setDiceConfig] = useState<DiceConfig>({ side: 20, count: 1 })
+  const [diceConfig, setDiceConfig] = useState<DiceConfig>({ side: 6, count: 2 })
   const [phase, setPhase] = useState<RollPhase>('idle')
   const [results, setResults] = useState<RollResult[]>([])
   const [isReady, setIsReady] = useState(false)
@@ -125,18 +126,17 @@ export default function App() {
 
       {/* デバッグオーバーレイ（?debugクエリ時のみ表示） */}
       {DEBUG && (
-        <div
-          style={{ position: 'fixed', top: 48, left: 0, right: 0, zIndex: 50 }}
-          className="px-4"
-        >
+        <div style={{ position: 'fixed', top: 48, left: 0, right: 0, zIndex: 50 }} className="px-4">
           <div className="rounded-xl bg-black/80 p-3 text-xs font-mono text-green-400 space-y-0.5">
             <p>permission: {permission}</p>
             <p>DeviceMotionEvent: {typeof DeviceMotionEvent !== 'undefined' ? 'あり' : 'なし'}</p>
             <p>イベント受信数: {accDebug?.eventCount ?? 0}</p>
             {accDebug ? (
               <>
-                <p>x={accDebug.x}  y={accDebug.y}  z={accDebug.z}</p>
-                <p>Δ(差分)={accDebug.delta}  閾値=12</p>
+                <p>
+                  x={accDebug.x} y={accDebug.y} z={accDebug.z}
+                </p>
+                <p>Δ(差分)={accDebug.delta} 閾値=12</p>
               </>
             ) : (
               <p>イベント未受信</p>
@@ -168,10 +168,6 @@ export default function App() {
 
       {showPanel && (
         <div style={{ position: 'relative', zIndex: 10 }} className="flex min-h-dvh flex-col">
-          <header className="flex items-center justify-center pt-8 pb-2">
-            <h1 className="text-xl font-bold text-white drop-shadow-md">🎲 Full Dice</h1>
-          </header>
-
           <div className="flex-1" />
 
           <div className="px-4 pb-6 space-y-3">
@@ -181,7 +177,7 @@ export default function App() {
 
             {permission === 'granted' && isReady && (
               <p className="text-center text-sm text-white/70 drop-shadow">
-                端末を振ってダイスを転がせます 📳
+                端末を振るとダイスが転がります 📳
               </p>
             )}
 

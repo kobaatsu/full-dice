@@ -1,5 +1,6 @@
-import { useEffect, useRef, useCallback, useState } from 'react'
-import type { DiceConfig, RollResult, RollPhase } from '@/lib/types/dice'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import type { DiceConfig, RollPhase, RollResult } from '@/lib/types/dice'
 
 // @3d-dice/dice-box has no official TypeScript types
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,7 +25,7 @@ function buildRollObjects(config: DiceConfig): RollObject[] {
       { qty: 1, sides: 10, themeColor: '#dc2626' },
     ]
   }
-  return [{ qty: config.count, sides: config.side }]
+  return [{ qty: config.count, sides: config.side, themeColor: '#FFFFFF' }]
 }
 
 export function useDiceBox({ containerId, onRollComplete, onReady }: UseDiceBoxOptions) {

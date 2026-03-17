@@ -1,5 +1,5 @@
-import { Smartphone, Settings } from 'lucide-react'
 import type { MotionPermission } from '@/lib/types/dice'
+import { Settings, Smartphone } from 'lucide-react'
 
 interface PermissionRequestProps {
   permission: MotionPermission
@@ -14,7 +14,7 @@ export function PermissionRequest({ permission, onRequest }: PermissionRequestPr
       {isDenied ? (
         <Settings className="mx-auto mb-3 h-8 w-8 text-red-500" />
       ) : (
-        <Smartphone className="mx-auto mb-3 h-8 w-8 text-indigo-500" />
+        <Smartphone className="mx-auto mb-3 h-8 w-8 text-green-500" />
       )}
 
       <p className="mb-1 font-semibold text-gray-800">
@@ -37,9 +37,7 @@ export function PermissionRequest({ permission, onRequest }: PermissionRequestPr
         onClick={onRequest}
         className={[
           'w-full rounded-xl px-6 py-3 font-bold text-white shadow active:scale-95 transition-all min-h-12',
-          isDenied
-            ? 'bg-orange-500 hover:bg-orange-600'
-            : 'bg-indigo-600 hover:bg-indigo-700',
+          isDenied ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-600 hover:bg-green-700',
         ].join(' ')}
       >
         {isDenied ? 'もう一度許可を試みる' : '許可する'}
