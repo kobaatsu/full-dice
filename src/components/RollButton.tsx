@@ -17,7 +17,7 @@ export function RollButton({ phase, isReady, onClick }: RollButtonProps) {
       onClick={onClick}
       disabled={isDisabled}
       className={cn(
-        'flex min-h-16 w-full items-center justify-center gap-3 rounded-2xl px-8 py-4',
+        'md:flex hidden min-h-16 w-full items-center justify-center gap-3 rounded-2xl px-8 py-4',
         'text-lg font-bold text-white transition-all',
         'focus:outline-none focus:ring-4 focus:ring-offset-2',
         isDisabled

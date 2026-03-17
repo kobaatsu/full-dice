@@ -159,50 +159,51 @@ export default function App() {
           )}
           {isComplete && (
             <div className="w-full px-4 space-y-3">
+              <p className="text-center text-lg text-white/60 drop-shadow">
+                <span className="inline sm:hidden">タップ</span>
+                <span className="hidden sm:inline">クリック</span>して戻る
+              </p>
               <ResultDisplay phase={phase} results={results} isD100={isD100} />
-              <p className="text-center text-sm text-white/60 drop-shadow">タップして戻る</p>
             </div>
           )}
         </div>
       )}
 
       {showPanel && (
-        <div style={{ position: 'relative', zIndex: 10 }} className="flex min-h-dvh flex-col">
-          <div className="flex-1" />
+        <div className="py-4 px-4 pb-6 gap-4 flex flex-col h-dvh z-10 relative">
+          <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-4 shadow-lg">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 text-center">
+              ダイスの種類
+            </p>
+            <DiceTypeSelector
+              selected={diceConfig.side}
+              onChange={handleSideChange}
+              disabled={!isReady}
+            />
+          </div>
 
-          <div className="px-4 pb-6 space-y-3">
+          {!isD100 && (
+            <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-4 shadow-lg">
+              <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 text-center">
+                個数
+              </p>
+              <DiceCountSelector
+                count={diceConfig.count}
+                onChange={handleCountChange}
+                disabled={!isReady}
+              />
+            </div>
+          )}
+
+          <div className="mt-auto">
             {isIOS && (permission === 'unknown' || permission === 'denied') && (
               <PermissionRequest permission={permission} onRequest={requestPermission} />
             )}
 
             {permission === 'granted' && isReady && (
-              <p className="text-center text-sm text-white/70 drop-shadow">
-                端末を振るとダイスが転がります 📳
+              <p className="md:hidden block text-center text-sm text-white/70 drop-shadow">
+                端末を振るとダイスが転がります
               </p>
-            )}
-
-            <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-4 space-y-3 shadow-lg">
-              <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 text-center">
-                ダイスの種類
-              </p>
-              <DiceTypeSelector
-                selected={diceConfig.side}
-                onChange={handleSideChange}
-                disabled={!isReady}
-              />
-            </div>
-
-            {!isD100 && (
-              <div className="rounded-2xl bg-white/90 backdrop-blur-sm p-4 space-y-3 shadow-lg">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 text-center">
-                  個数
-                </p>
-                <DiceCountSelector
-                  count={diceConfig.count}
-                  onChange={handleCountChange}
-                  disabled={!isReady}
-                />
-              </div>
             )}
 
             <RollButton phase={phase} isReady={isReady} onClick={handleRoll} />
