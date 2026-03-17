@@ -46,7 +46,7 @@ export function useDiceBox({ containerId, onRollComplete, onReady }: UseDiceBoxO
         if (cancelled) return
 
         instance = new DiceBox(`#${containerId}`, {
-          assetPath: '/assets/dice-box/',
+          assetPath: `${import.meta.env.BASE_URL}assets/dice-box/`,
           gravity: 1,
           mass: 1,
           friction: 0.8,
